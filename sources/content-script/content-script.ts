@@ -11,13 +11,13 @@ export class CountStarter {
 		});
 
 		let onfocusIn = function onFocusIn(event: FocusEvent) {
-			console.log("focused element", event.target);
+			
 			sendSelection();
 		}
 		document.addEventListener('focusin', onfocusIn);
 
 		let onfocusOut = function onfocusOut(event: FocusEvent) {
-			console.log("blured element", event.target);
+			
 			sendSelection();
 		}
 		document.addEventListener('focusout', onfocusOut);
