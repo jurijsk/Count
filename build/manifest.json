@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Count",
-	"description": "Counts characters in selection or focused input field",
+	"description": "Counts the number of tweets and remaining characters in selected text.",
 	"version": "0.1.0",
 	"browser_action": {
 		"default_icon": "images/icon32.png",
