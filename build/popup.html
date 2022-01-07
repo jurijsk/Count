@@ -5,12 +5,30 @@
 	<meta charset="utf-8">
 	<script src="popup.js"></script>
 	<link href="popup.css" rel="stylesheet">
-	<title>Copycan popup</title>
+	<title>Count popup</title>
 </head>
 
 <body>
 	<div id="root">
-		oh, booi
+		<div>
+			<input type="radio" id="counterTypeTweetsCharacters" checked name="counter" value="tweets_characters">
+			<label for="counterTypeWords">Tweets|characters</label> <span class="counter">2|230</span>
+		</div>
+		<div>
+			<input type="radio" id="counterTypeCharacters" name="counter" value="characters">
+			<label for="counterTypeCharacters">Characters:</label> <span class="counter">230</span>
+			<br/>
+			show badge after <input class="tiny" type="text" value="20"/> characters
+		</div>
+		<div>
+			<input type="radio" id="counterTypeWords" name="counter" value="words">
+			<label for="counterTypeWords">Words</label> <span class="counter">5</span>
+		</div>
+
+		<div>
+			<input type="checkbox" id="countTextFields" checked name="counter" value="words">
+			<label for="counterTypeWords">Count text in input fields</label> <span class="counter">5</span>
+		</div>
 	</div>
 </body>
 

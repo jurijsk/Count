@@ -40,25 +40,35 @@ let dispatchMessage = function dispatchMessage(message: RuntimeMessage
 chrome.runtime.onMessage.addListener(dispatchMessage);
 
 
+let maxLength = 280;
+let countFromUserParam = 20;
+let countTillUserParam = 999;
+
 let updateBadge = function updateBadge(selection: SelectionObj){
-	let text = '9999+';
+	let badgeText = '9999+';
 	let color = '#BC89EC';
-	let len = selection.text.length;
-	if(len == 0) {
-		text = '';
-	} else if(len <= 999) {
-		if(len >= 240 && len < 280) {
+	let textLenth = selection.text.length;
+	let count = Math.ceil(textLenth / maxLength); 
+	let tweetLen = textLenth % maxLength;
+
+
+	if(textLenth <= countFromUserParam || textLenth >= countTillUserParam) {
+		badgeText = '';
+	} else {
+		if(tweetLen >= 200 && tweetLen < 240) {
+			color = '#F09E00';
+		} else if(tweetLen >= 240 && tweetLen < 280) {
 			color = '#FF6500';
-		} else if(len == 280) {
+		} else if(tweetLen == 0) {
 			color = '#FF0000';
 		}
-		text = '' + len;
+		badgeText = (count >= 2 ? '' + count + '|' : '') + (maxLength - (tweetLen || maxLength));
 	}
 
-	chrome.browserAction.setBadgeText({text: text});
+	chrome.browserAction.setBadgeText({text: badgeText});
 	chrome.browserAction.setBadgeBackgroundColor({color: color});
-	chrome.browserAction.setTitle({title: `Count: ${len} characters selected.`});
-	return {msg: 'badge text: ' + text}
+	chrome.browserAction.setTitle({title: `Count: ${textLenth} characters selected.`});
+	return {msg: 'badge text: ' + badgeText}
 }
 
 export {}

@@ -37,26 +37,29 @@ let dispatchMessage = function dispatchMessage(message, sender, sendResponse) {
     }
 };
 chrome.runtime.onMessage.addListener(dispatchMessage);
+let tweetLength = 280;
 let updateBadge = function updateBadge(selection) {
-    let text = '9999+';
+    let badgeLen = '9999+';
     let color = '#BC89EC';
     let len = selection.text.length;
+    let count = Math.round(len / tweetLength);
+    len = len % tweetLength;
     if (len == 0) {
-        text = '';
+        badgeLen = '';
     }
-    else if (len <= 999) {
+    else {
         if (len >= 240 && len < 280) {
             color = '#FF6500';
         }
         else if (len == 280) {
             color = '#FF0000';
         }
-        text = '' + len;
+        badgeLen = (count ? '' + count : '') + '|' + len % tweetLength;
     }
-    chrome.browserAction.setBadgeText({ text: text });
+    chrome.browserAction.setBadgeText({ text: badgeLen });
     chrome.browserAction.setBadgeBackgroundColor({ color: color });
     chrome.browserAction.setTitle({ title: `Count: ${len} characters selected.` });
-    return { msg: 'badge text: ' + text };
+    return { msg: 'badge text: ' + badgeLen };
 };
 
 /******/ })()
